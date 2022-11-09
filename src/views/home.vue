@@ -1,31 +1,33 @@
 <template>
-  <main>
-    <h1 class="title">第一頁由此開始</h1>
+  <main id="chart" ref="chartRef">
   </main>
 </template>
 
-<script>
-export default {
-  setup () {
-    return {
+<script setup>
+import { onMounted, ref } from 'vue'
+import { useChart } from '../composables/chart-core'
 
-    }
-  }
-}
+const chartRef = ref(null)
+const data = ref([
+  ['product', '2015', '2016', '2017'],
+  ['Matcha Latte', 43.3, 85.8, 93.7],
+  ['Milk Tea', 83.1, 73.4, 55.1],
+  ['Cheese Cocoa', 86.4, 65.2, 82.5],
+  ['Walnut Brownie', 72.4, 53.9, 39.1]
+])
+onMounted(() => {
+  useChart({
+    target: chartRef.value,
+    data
+  })
+})
+
 </script>
 
 <style lang="scss" scoped>
 main {
   height: 100vh;
-  background-color: #111111;
   display: grid;
   place-items: center;
-  .title {
-    color:  transparent;
-    font-size: 4rem;
-    background-clip: text;
-    -webkit-background-clip: text;
-    background-image: linear-gradient(to bottom, #5ee7df 0%, #b490ca 100%);
-  }
 }
 </style>
